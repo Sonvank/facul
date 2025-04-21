@@ -1,0 +1,191 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Corpo e fundo */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #76e2cb, #78c4f8);
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  /* Header e menu */
+  header {
+    background-color: #2c79c1;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .nav-list li a:hover {
+    color: #cde9ff;
+  }
+  
+  /* Botão menu sanduíche */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 30px;
+    height: 22px;
+    justify-content: space-between;
+  }
+  
+  .menu-toggle span {
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.4s;
+  }
+  
+  /* Animação de X */
+  .menu-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+  
+    .nav-list {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 65px;
+      left: 0;
+      background-color: #2c79c1;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .nav-list.active {
+      display: flex;
+    }
+  
+    .nav-list li {
+      margin: 1rem 0;
+    }
+  }
+  
+  /* Formulário */
+  .container {
+    max-width: 500px;
+    margin: 120px auto 50px;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  form h2 {
+    margin-bottom: 1.5rem;
+    color: #2c79c1;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #2c79c1;
+    outline: none;
+    box-shadow: 0 0 5px #a0d3ff;
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #2c79c1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #215a91;
+  }
+
+  .btn-voltar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2c79c1; /* verde ou a cor que quiser */
+
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-voltar:hover {
+    background-color:#215a91 ;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white; /* ou a cor que preferir */
+  }
+  
+  a:hover {
+    color: #cde9ff; /* muda a cor no hover */
+  }
+  

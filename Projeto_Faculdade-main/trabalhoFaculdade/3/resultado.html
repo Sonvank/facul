@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado do Cadastro do Pet</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .resultado {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Resultado do Cadastro do Pet</h2>
+    <div class="resultado" id="resultado">
+
+        </div>
+
+ <!-- From Uiverse.io by vinodjangid07 --> 
+ <div class="container2">
+<button class="Btn">
+    <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
+    <span class="icon2"></span>
+    <span class="tooltip">Download</span>
+ </button>
+</div>
+    <script>
+        // Função para verificar se o parâmetro existe e retornar uma string padrão caso contrário
+        function getParam(param) {
+            const value = new URLSearchParams(window.location.search).get(param);
+            return value || ''; // Retorna string vazia se não houver valor
+        }
+
+        // Cria o HTML com os dados recebidos
+        const nomePet = getParam("NomePet");
+        const especie = getParam("Especie");
+        const raca = getParam("raca");
+        const idadePet = getParam("IdadePet");
+        const sexoPet = getParam("SexoPet");
+        const castrado = getParam("Cast") === "Sim" ? "Sim" : "Não";
+        const antiPulga = getParam("AntiPulga");
+        const remedio = getParam("Remedio") || "Não informado";
+        const banhoSaida = getParam("BanhoSaida") === "Sim" ? "Sim" : "Não";
+        const historico = getParam("Histo") || "Nenhuma informação fornecida";
+        const observacoes = getParam("OBS") || "Nenhuma observação";
+
+        const resultadoHTML = `
+            <p><strong>Nome:</strong> ${nomePet}</p>
+            <p><strong>Espécie:</strong> ${especie}</p>
+            <p><strong>Raça:</strong> ${raca}</p>
+            <p><strong>Idade:</strong> ${idadePet} anos</p>
+            <p><strong>Sexo:</strong> ${sexoPet}</p>
+            <p><strong>Castrado:</strong> ${castrado}</p>
+            <p><strong>Antipulgas Aplicado:</strong> ${antiPulga}</p>
+            <p><strong>Uso de Medicamentos:</strong> ${remedio}</p>
+            <p><strong>Banho de Saída:</strong> ${banhoSaida}</p>
+            <p><strong>Histórico:</strong> ${historico}</p>
+            <p><strong>Observações:</strong> ${observacoes}</p>
+        `;
+
+        // Exibe o conteúdo gerado na div "resultado"
+        document.getElementById("resultado").innerHTML = resultadoHTML;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Tutores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #campo-busca {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        #lupa-busca {
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+        }
+
+        #lupa-busca:hover {
+            color: #333;
+        }
+
+        .lista-tutores {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-y: auto;
+            max-height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .tutor-item {
+            padding: 10px 0;
+            border-bottom: 1px dotted #eee;
+            display: flex;
+            justify-content: space-between; /* Adiciona espaçamento entre o nome e os ícones */
+            align-items: center; /* Alinha verticalmente o nome e os ícones */
+        }
+
+        .tutor-item:last-child {
+            border-bottom: none;
+        }
+
+        .botao-voltar {
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: fit-content; /* Ajusta a largura do botão ao conteúdo */
+        }
+
+        .botao-voltar:hover {
+            background-color: #ddd;
+        }
+
+        .nome-tutor {
+            margin-right: 100px; /* Espaçamento entre o nome e os ícones */
+        }
+
+        .icones {
+            display: flex; /* Coloca os ícones em linha */
+            align-items: center; /* Alinha verticalmente os ícones */
+        }
+
+        .icone-lixo, .icone-adicionar {
+            font-size: 20px; /* Tamanho dos ícones */
+            cursor: pointer; /* Estilo de cursor pointer para indicar interatividade */
+        }
+
+        .icone-lixo {
+            color: #FF0000; /* Cor do ícone de lixo (vermelho) */
+            margin-right: 10px; /* Espaçamento entre os ícones */
+        }
+
+        .icone-adicionar {
+            color: #008000; /* Cor do ícone de adição (verde) */
+        }
+
+        .icone-lixo:hover {
+            color: #B22222; /* Vermelho mais escuro no hover */
+        }
+
+        .icone-adicionar:hover {
+            color: #006400; /* Verde mais escuro no hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="barra-superior">
+            <input type="text" id="campo-busca" placeholder="Buscar tutor...">
+            <span id="lupa-busca">&#128269;</span>
+        </div>
+
+        <div class="lista-tutores" id="lista-tutores">
+            </div>
+
+        <button class="botao-voltar" id="botao-voltar">Voltar</button>
+    </div>
+
+    <script>
+        const campoBusca = document.getElementById('campo-busca');
+        const lupaBusca = document.getElementById('lupa-busca');
+        const listaTutores = document.getElementById('lista-tutores');
+        const botaoVoltar = document.getElementById('botao-voltar');
+
+        // Dados dos tutores (simulação)
+        const tutores = [
+            { nome: "Ana Silva" },
+            { nome: "João Oliveira" },
+            { nome: "Maria Souza" },
+            { nome: "Pedro Rocha" },
+            { nome: "Carla Martins" },
+            { nome: "Bruno Pereira" },
+            { nome: "Fernanda Costa" },
+            { nome: "Lucas Santos" },
+            { nome: "Camila Ribeiro" },
+            { nome: "Rafael Souza" }
+        ];
+
+        function exibirTutores(tutoresParaExibir) {
+            listaTutores.innerHTML = ''; // Limpa a lista
+            tutoresParaExibir.forEach(tutor => {
+                const tutorItem = document.createElement('div');
+                tutorItem.className = 'tutor-item';
+                tutorItem.innerHTML = `<span class="nome-tutor">${tutor.nome}</span>
+                                       <div class="icones">
+                                           <span class="icone-lixo">&#128465;</span>
+                                           <span class="icone-adicionar">&#10133;</span>
+                                       </div>`;
+                listaTutores.appendChild(tutorItem);
+            });
+
+            // Adiciona event listeners aos ícones de lixo e adição
+            const iconesLixo = listaTutores.querySelectorAll('.icone-lixo');
+            const iconesAdicionar = listaTutores.querySelectorAll('.icone-adicionar');
+
+            iconesLixo.forEach((icone, index) => {
+                icone.addEventListener('click', () => {
+                    // Lógica para apagar o tutor
+                    tutores.splice(index, 1); // Remove o tutor do array
+                    exibirTutores(tutores); // Atualiza a lista exibida
+                });
+            });
+
+            iconesAdicionar.forEach(icone => {
+                icone.addEventListener('click', () => {
+                    // Lógica para adicionar dados do tutor
+                    alert('Funcionalidade de adicionar dados do tutor será implementada aqui!');
+                });
+            });
+        }
+
+        function realizarBusca() {
+            const termoBusca = campoBusca.value.toLowerCase();
+            const tutoresFiltrados = tutores.filter(tutor => tutor.nome.toLowerCase().includes(termoBusca));
+            exibirTutores(tutoresFiltrados);
+        }
+
+        // Eventos
+        lupaBusca.addEventListener('click', realizarBusca);
+        campoBusca.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                realizarBusca();
+            }
+        });
+
+        botaoVoltar.addEventListener('click', () => {
+            window.history.back();
+        });
+
+        // Exibe todos os tutores inicialmente
+        exibirTutores(tutores);
+    </script>
+</body>
+</html>

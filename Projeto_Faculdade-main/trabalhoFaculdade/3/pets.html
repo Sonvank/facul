@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Pets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #campo-busca {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        #lupa-busca {
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+        }
+
+        #lupa-busca:hover {
+            color: #333;
+        }
+
+        .lista-pets {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-y: auto;
+            max-height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .pet-item {
+            padding: 10px 0;
+            border-bottom: 1px dotted #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pet-item:last-child {
+            border-bottom: none;
+        }
+
+        .botao-voltar {
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: fit-content;
+        }
+
+        .botao-voltar:hover {
+            background-color: #ddd;
+        }
+
+        .nome-pet {
+            margin-right: 100px;
+        }
+
+        .icones {
+            display: flex;
+            align-items: center;
+        }
+
+        .icone-lixo, .icone-adicionar {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .icone-lixo {
+            color: #FF0000;
+            margin-right: 10px;
+        }
+
+        .icone-adicionar {
+            color: #008000;
+        }
+
+        .icone-lixo:hover {
+            color: #B22222;
+        }
+
+        .icone-adicionar:hover {
+            color: #006400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="barra-superior">
+            <input type="text" id="campo-busca" placeholder="Buscar pet...">
+            <span id="lupa-busca">&#128269;</span>
+        </div>
+
+        <div class="lista-pets" id="lista-pets">
+            </div>
+
+        <button class="botao-voltar" id="botao-voltar">Voltar</button>
+    </div>
+
+    <script>
+        const campoBusca = document.getElementById('campo-busca');
+        const lupaBusca = document.getElementById('lupa-busca');
+        const listaPets = document.getElementById('lista-pets');
+        const botaoVoltar = document.getElementById('botao-voltar');
+
+        // Dados dos pets (simulação)
+        const pets = [
+            { nome: "Rex" },
+            { nome: "Mimi" },
+            { nome: "Bob" },
+            { nome: "Luna" },
+            { nome: "Max" },
+            { nome: "Belinha" },
+            { nome: "Thor" },
+            { nome: "Mel" },
+            { nome: "Simba" },
+            { nome: "Nala" }
+        ];
+
+        function exibirPets(petsParaExibir) {
+            listaPets.innerHTML = '';
+            petsParaExibir.forEach(pet => {
+                const petItem = document.createElement('div');
+                petItem.className = 'pet-item';
+                petItem.innerHTML = `<span class="nome-pet">${pet.nome}</span>
+                                       <div class="icones">
+                                           <span class="icone-lixo">&#128465;</span>
+                                           <span class="icone-adicionar">&#10133;</span>
+                                       </div>`;
+                listaPets.appendChild(petItem);
+            });
+
+            // Adiciona event listeners aos ícones de lixo e adição
+            const iconesLixo = listaPets.querySelectorAll('.icone-lixo');
+            const iconesAdicionar = listaPets.querySelectorAll('.icone-adicionar');
+
+            iconesLixo.forEach((icone, index) => {
+                icone.addEventListener('click', () => {
+                    // Lógica para apagar o pet
+                    pets.splice(index, 1);
+                    exibirPets(pets);
+                });
+            });
+
+            iconesAdicionar.forEach(icone => {
+                icone.addEventListener('click', () => {
+                    // Lógica para adicionar dados do pet
+                    alert('Funcionalidade de adicionar dados do pet será implementada aqui!');
+                });
+            });
+        }
+
+        function realizarBusca() {
+            const termoBusca = campoBusca.value.toLowerCase();
+            const petsFiltrados = pets.filter(pet => pet.nome.toLowerCase().includes(termoBusca));
+            exibirPets(petsFiltrados);
+        }
+
+        // Eventos
+        lupaBusca.addEventListener('click', realizarBusca);
+        campoBusca.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                realizarBusca();
+            }
+        });
+
+        botaoVoltar.addEventListener('click', () => {
+            window.history.back();
+        });
+
+        // Exibe todos os pets inicialmente
+        exibirPets(pets);
+    </script>
+</body>
+</html>

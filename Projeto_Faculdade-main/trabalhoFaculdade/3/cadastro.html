@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro do Pet</title>
+    <link rel="stylesheet" href="stylle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">MeuPet</div>
+            <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-list">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-list" id="nav-list">
+                <!-- quando o software aberto aparecer a primeira tela como novo tutor-->
+                <li><a href="#">Novo Tutor</a></li> <!-- quando clicavel abrir pagina para cadrastro de novo tutor-->
+                <li><a href="#">Pets</a></li> <!-- quando clicavel abrir pagina para busca de pets-->
+                <li><a href="#">Turores</a></li> <!-- quando clicavel abrir pagina para busca de tutores-->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form action="resultado.html" method="get">
+            <h2>Cadastro do Pet</h2>
+
+            <div class="form-group">
+                <label for="NomePet">Nome do Pet:</label>
+                <input type="text" id="NomePet" name="NomePet" required>
+            </div>
+
+            <div class="form-group">
+                <label>Espécie:</label>
+                <div style="display: flex; gap: 20px; padding-top: 5px;">
+                    <label><input type="radio" name="Especie" value="Cão" required> Cão</label>
+                    <label><input type="radio" name="Especie" value="Gato"> Gato</label>
+                    <label><input type="radio" name="Especie" value="Outros"> Outros</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="raca">Raça:</label>
+                <input type="text" id="raca" name="raca" required>
+            </div>
+
+            <div class="form-group">
+                <label for="IdadePet">Idade até 12 anos:</label>
+                <input type="number" id="IdadePet" name="IdadePet" max="12" required>
+            </div>
+
+            <div class="form-group">
+                <label>Sexo:</label>
+                <div style="display: flex; gap: 20px; padding-top: 5px;">
+                    <label><input type="radio" name="SexoPet" value="Macho" required> Macho</label>
+                    <label><input type="radio" name="SexoPet" value="Fêmea"> Fêmea</label>
+                </div>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center;">
+                <label for="Cast" style="margin-right: 10px;">Castrado?</label>
+                <label style="margin-right: 15px;">
+                    <input type="radio" name="Cast" value="Sim" required> Sim
+                </label>
+                <label>
+                    <input type="radio" name="Cast" value="Não"> Não
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="AntiPulga">Antipulgas Aplicado:</label>
+                <input type="text" id="AntiPulga" name="AntiPulga" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Remedio">Uso de Medicamentos?</label>
+                <input type="text" id="Remedio" name="Remedio">
+            </div>
+
+            <div class="form-group">
+                <label>Banho de Saída?</label><br>
+                <label style="margin-right: 10px;">
+                    <input type="radio" name="BanhoSaida" value="Sim" required> Sim
+                </label>
+                <label>
+                    <input type="radio" name="BanhoSaida" value="Não"> Não
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="Histo">Histórico do Pet (doenças ou sintomas):</label>
+                <textarea id="Histo" name="Histo"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="OBS">Observações:</label>
+                <textarea id="OBS" name="OBS"></textarea>
+                <label for="imagemPet">Enviar Imagem:</label>
+                <input type="file" id="imagemPet" accept="image/*">
+            </div>
+
+            <button type="submit">Ver Resultado</button>
+
+        </form>
+    </div>
+
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const navList = document.getElementById('nav-list');
+
+        toggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            toggle.classList.toggle('open');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+            toggle.setAttribute('aria-expanded', !isExpanded);
+        });
+    </script>
+
+</body>
+</html>
